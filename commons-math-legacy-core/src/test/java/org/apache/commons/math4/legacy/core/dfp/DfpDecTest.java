@@ -22,6 +22,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class DfpDecTest {
 
     private DfpField field;
@@ -562,4 +564,17 @@ public class DfpDecTest {
              pinf,
              DfpField.FLAG_OVERFLOW | DfpField.FLAG_INEXACT, "Next After #14");
     }
+
+    @Test
+    public void testRoundPositiveNumber() {
+        field = new DfpField(20);
+        DfpDec dfpDec = new DfpDec(field, 1);
+
+        int inputPositiveNumber = 1;
+        int expectedResultForPositiveNumber = 16;
+        int roundResponse = dfpDec.round(inputPositiveNumber);
+
+        assertEquals(expectedResultForPositiveNumber, roundResponse);
+    }
+
 }
