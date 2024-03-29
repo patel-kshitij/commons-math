@@ -81,7 +81,7 @@ public class MultivariateNormalMixtureExpectationMaximization {
      * @throws DimensionMismatchException if rows of data have different numbers
      *             of columns
      * @throws NumberIsTooSmallException if the number of columns in the data is
-     *             less than 2
+     *             less than 1
      */
     public MultivariateNormalMixtureExpectationMaximization(double[][] data)
         throws NotStrictlyPositiveException,
@@ -99,9 +99,9 @@ public class MultivariateNormalMixtureExpectationMaximization {
                 throw new DimensionMismatchException(data[i].length,
                                                      data[0].length);
             }
-            if (data[i].length < 2) {
+            if (data[i].length < 1) {
                 throw new NumberIsTooSmallException(LocalizedFormats.NUMBER_TOO_SMALL,
-                                                    data[i].length, 2, true);
+                                                    data[i].length, 1, true);
             }
             this.data[i] = Arrays.copyOf(data[i], data[i].length);
         }
@@ -294,7 +294,7 @@ public class MultivariateNormalMixtureExpectationMaximization {
      * @return Multivariate normal mixture model estimated from the data
      * @throws NumberIsTooLargeException if {@code numComponents} is greater
      * than the number of data rows.
-     * @throws NumberIsTooSmallException if {@code numComponents < 2}.
+     * @throws NumberIsTooSmallException if {@code numComponents < 1}.
      * @throws NotStrictlyPositiveException if data has less than 2 rows
      * @throws DimensionMismatchException if rows of data have different numbers
      *             of columns
@@ -306,8 +306,8 @@ public class MultivariateNormalMixtureExpectationMaximization {
         if (data.length < 2) {
             throw new NotStrictlyPositiveException(data.length);
         }
-        if (numComponents < 2) {
-            throw new NumberIsTooSmallException(numComponents, 2, true);
+        if (numComponents < 1) {
+            throw new NumberIsTooSmallException(numComponents, 1, true);
         }
         if (numComponents > data.length) {
             throw new NumberIsTooLargeException(numComponents, data.length, true);
